@@ -40,6 +40,7 @@ INSTALLED_APPS = [
      'rest_framework',
     'images',
     'user',
+    'drf_yasg',
    
    
 ]
