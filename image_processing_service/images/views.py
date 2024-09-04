@@ -40,12 +40,11 @@ def upload_image(request):
            
             image_instance = PilImage.open(image_file)
             format = image_instance.format
-            size = f"{image_instance.width}x{image_instance.height}"
 
-            print(f"Image format is {format}, size is {size}")
+            print(f"Image format is {format}")
 
             image.format = format
-            image.size = size
+            image.size = 0
             image.save()
 
             print("Image saved")
@@ -55,7 +54,7 @@ def upload_image(request):
                 'id': image.id,
                 'url': file_url,
                 'format': format,
-                'size': size
+                
             }
             print("Returning response")
             return Response(response, status=status.HTTP_201_CREATED)
@@ -212,7 +211,7 @@ def remove_background(request, image_id):
             image_instance = image.objects.get(id=image_id, user=request.user)
             image_file = image_instance.image
             pil_image = PilImage.open(image_file)
-            rem_pic=pic.remove_background(pil_image)
+            rem_pic=pic.remove_background_deep_learning(pil_image)
             buffer = io.BytesIO()
             rem_pic.save(buffer, format='PNG')
             buffer.seek(0)

@@ -150,3 +150,21 @@ CACHES = {
     }
 }
 
+from datetime import timedelta
+
+# Other settings...
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),  # Set access token lifetime to 2 hours
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),  # Set refresh token lifetime to 1 day (default is 1 day)
+    'ROTATE_REFRESH_TOKENS': False,  # Whether to rotate refresh tokens on refresh
+    'BLACKLIST_AFTER_ROTATION': True,  # Whether to blacklist the old refresh tokens after rotation
+    'ALGORITHM': 'HS256',  # JWT signing algorithm
+    'VERIFYING_KEY': None,  # Optional, used if you have a public key to verify the JWT
+    'SIGNING_KEY': 'your-secret-key',  # Your secret key to sign the JWT
+    'AUTH_HEADER_TYPES': ('Bearer',),  # Default is ('Bearer',)
+    'USER_ID_FIELD': 'id',  # Field used to identify the user
+    'USER_ID_CLAIM': 'user_id',  # Claim used to store the user ID
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+}

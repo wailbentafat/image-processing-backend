@@ -63,7 +63,18 @@ def apply_sepia(image_path):
 
     return image
 
-def remove_background_deep_learning(image_path, output_path):
-    input_image = Image.open(image_path)
+
+def remove_background_deep_learning(input_image):
+    print("remove_background_deep_learning function called")
+    print(f"input_image is of type {type(input_image)}")
+    if isinstance(input_image, str):
+        print("input_image is a path, opening image")
+        input_image = Image.open(input_image)
+    else:
+        print("input_image is already an Image object")
+    
+    print("Processing the image")
+    # Process the image
     output_image = remove(input_image)
-    output_image.save(output_path)
+    print("Image processed")
+    return output_image
